@@ -51,3 +51,7 @@ export const getOpenKeys = (items) => items.map(({ key }) => key);
 export const getDiff = (allKeys, restKeys) => {
   return difference(allKeys, restKeys)[0];
 };
+
+export const getStringWithCoords = ({ points }) => {
+  return points.map(({ lat, lng }) => `${lng},${lat}`).join(";");
+};

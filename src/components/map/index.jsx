@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { routes } from "../../constants";
+
+import { getRoute } from "../../http-services";
 
 export const Map = () => {
+  useEffect(() => {
+    getRoute(routes[0]).then((data) => console.log(data));
+  }, []);
   return (
     <MapContainer
       className="main"
