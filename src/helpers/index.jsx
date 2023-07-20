@@ -1,5 +1,6 @@
 import React from "react";
 import { Checkbox } from "antd";
+import { difference } from "lodash";
 
 export const getItems = (selected, setSelected) => (items) => {
   const normalizedArray = items.map(({ label, key, points }) => {
@@ -46,3 +47,7 @@ export const getItemFromCoords =
   };
 
 export const getOpenKeys = (items) => items.map(({ key }) => key);
+
+export const getDiff = (allKeys, restKeys) => {
+  return difference(allKeys, restKeys)[0];
+};

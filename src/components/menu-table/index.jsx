@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { Menu } from "antd";
 import { routes } from "../../constants";
-import { getItems, getOpenKeys } from "../../helpers";
+import { getItems, getOpenKeys, getDiff } from "../../helpers";
 
 export const MenuTable = () => {
   const [items] = useState(routes);
@@ -12,6 +12,12 @@ export const MenuTable = () => {
   );
   const keys = useMemo(() => getOpenKeys(items), [items]);
   return (
-    <Menu mode="inline" style={{ width: "95%" }} items={data} openKeys={keys} />
+    <Menu
+      mode="inline"
+      style={{ width: "95%" }}
+      items={data}
+      openKeys={keys}
+      onOpenChange={(rest) => setSelected(() => getDiff(keys, rest))}
+    />
   );
 };
