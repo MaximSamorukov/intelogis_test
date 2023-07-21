@@ -33,6 +33,11 @@ export const MenuTable = () => {
       style={{ width: "95%" }}
       items={data}
       openKeys={keys}
+      onSelect={(e) => {
+        setSelected(() => e.keyPath[1]);
+        const currentRouteRaw = allRoutes.find((i) => i.key === e.keyPath[1]);
+        dispatch(selectRoute(currentRouteRaw));
+      }}
       onOpenChange={(rest) => {
         setSelected(() => getDiff(keys, rest));
         const selectedRouteName = getDiff(keys, rest);
