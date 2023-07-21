@@ -7,9 +7,9 @@ import { getRoute } from "../../http-services";
 
 export const Map = () => {
   const currentRoute = useSelector((state) => state.route);
-  useEffect(() => {
-    getRoute(routes[0]).then((data) => console.log(data));
-  }, []);
+  //useEffect(() => {
+  //  getRoute(routes[0]).then((data) => console.log(data));
+  //}, []);
   const firstCoords = currentRoute.selectedCoords?.length
     ? currentRoute.selectedCoords[0]
     : { lat: 50, lng: 50 };

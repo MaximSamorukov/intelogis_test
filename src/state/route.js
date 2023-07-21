@@ -18,9 +18,12 @@ export const routeSlice = createSlice({
       state.selectedCoords = null;
       state.selectedPolyline = null;
     },
+    setPolyline: (state, action) => {
+      state.selectedPolyline = action.payload;
+    },
   },
 });
 
-export const { selectRoute, deSelectRoute } = routeSlice.actions;
+export const { selectRoute, deSelectRoute, setPolyline } = routeSlice.actions;
 
 export default routeSlice.reducer;

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu } from "antd";
 import { routes } from "../../constants";
@@ -22,6 +22,13 @@ export const MenuTable = () => {
     },
     [allRoutes, dispatch]
   );
+
+  useEffect(() => {
+    currentRoute.selectedRoute &&
+      dispatch({ type: "GET_POLYLINE", currentRoute });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentRoute.selectedRoute]);
+
   const data = useMemo(
     () => getItems(currentRoute?.selectedRoute, setSelected)(allRoutes),
     [allRoutes, currentRoute?.selectedRoute, setSelected]
