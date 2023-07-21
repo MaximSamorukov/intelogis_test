@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# Тестовое задание React разработчика
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Компания: Intelogis ILS;
 
-## Available Scripts
+Соискатель: Саморуков Максим Львович;
+e-mail: maxim.samorukov@gmail.com;
+telegram: https://t.me/Maksim_Samorukov
 
-In the project directory, you can run:
+## Тестовое задание
 
-### `npm start`
+Требуется реализовать приложение по отображению маршрутов на карте.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Используя заданный набор маршрутов (таблица 1), реализовать экран, в котором слева будет таблица со списком маршрутов, а справа карта. При выборе в таблице строки с маршрутом, выбранная строка должна подсветиться, а на карте должны отобразиться точки маршрута в виде маркеров и полилиния (polyline) трека движения по точкам маршрута, полученная из сервиса построения треков по дорогам OSRM (или другой). При выборе маршрута в таблице, на карте происходит центрирование и масштабирование таким образом, что весь маршрут должен попасть в область видимости карты. Одновременно на карте может отображаться только один маршрут – выбранный.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Для отображения карты желательно использовать пакет Leaflet, для компонентов — AntDesign, для хранения стейта компонентов и данных обязательно использовать Redux (redux-toolkit), для реакции на события — Sagas. В качестве основы приложения можно использовать React Create App или Vite. Использовать только функциональные компоненты и преимущественно функциональное программирование. Распределять код по каталогам, исходя из принадлежности к функциям: components, selectors, reducers, sagas, HTTP-services, helpers, etc. Обязательно задействовать sagas для получения трека по точкам, а также обязательно задействовать любой HTTP-сервис для обращения к API построения треков. Предусмотреть обработку ошибок от HTTP-сервисов. CSS-стили допускается писать в препроцессоре SASS/LESS.
 
-### `npm test`
+Решение требуется предоставить в виде исходного кода, готового для развертывания на веб-сервере (приложить файловый архив или ссылку на github, например). Приложение нужно писать чисто и аккуратно, используя известные паттерны, сразу с рефакторингом - так, будто вы пишите production-приложение.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Для получения полилиний (polylines) маршрута можно использовать API OSRM:
 
-### `npm run build`
+http://project-osrm.org/docs/v5.5.1/api/?language=cURL#route-service
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Список маршрутов
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[
+{
+label: "Маршрут №1",
+key: "route_1",
+points: [
+{
+lat: 59.84660399,
+lng: 30.29496392,
+},
+{
+lat: 59.82934196,
+lng: 30.42423701,
+},
+{
+lat: 59.83567701,
+lng: 30.38064206,
+},
+],
+},
+{
+label: "Маршрут №2",
+key: "route_2",
+points: [
+{
+lat: 59.82934196,
+lng: 30.42423701,
+},
+{
+lat: 59.82761295,
+lng: 30.41705607,
+},
+{
+lat: 59.84660399,
+lng: 30.29496392,
+},
+],
+},
+{
+label: "Маршрут №3",
+key: "route_3",
+points: [
+{
+lat: 59.83567701,
+lng: 30.38064206,
+},
+{
+lat: 59.84660399,
+lng: 30.29496392,
+},
+{
+lat: 59.82761295,
+lng: 30.41705607,
+},
+],
+},
+];
