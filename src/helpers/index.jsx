@@ -55,3 +55,22 @@ export const getDiff = (allKeys, restKeys) => {
 export const getStringWithCoords = ({ points }) => {
   return points.map(({ lat, lng }) => `${lng},${lat}`).join(";");
 };
+
+export const getSteps = (data = []) =>
+  data
+    .map((i) => (i.legs || []).map((leg) => leg.steps))
+    .flat()
+    .reduce((acc, array) => {
+      const concatedArray = acc.concat(array);
+      return concatedArray;
+    }, [])
+    .map(
+      ({
+        maneuver: {
+          location: [lng, lat],
+        },
+      }) => [lat, lng]
+    );
+
+export const getWaypoints = (data = []) =>
+  data.map(({ location: [lng, lat] }) => [lat, lng]);

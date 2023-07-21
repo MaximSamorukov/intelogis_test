@@ -1,15 +1,17 @@
 import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
-import { routes } from "../../constants";
-
-import { getRoute } from "../../http-services";
+import { Marker } from "react-leaflet/Marker";
+import { Polyline } from "react-leaflet/Polyline";
+import { getSteps, getWaypoints } from "../../helpers";
 
 export const Map = () => {
   const currentRoute = useSelector((state) => state.route);
-  //useEffect(() => {
-  //  getRoute(routes[0]).then((data) => console.log(data));
-  //}, []);
+  const waypoints = getWaypoints(
+    currentRoute?.selectedPolyline?.waypoints || []
+  );
+  const steps = getSteps(currentRoute?.selectedPolyline?.routes || []);
+
   const firstCoords = currentRoute.selectedCoords?.length
     ? currentRoute.selectedCoords[0]
     : { lat: 50, lng: 50 };
@@ -24,6 +26,10 @@ export const Map = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      {waypoints.map((i, ind) => {
+        return <Marker key={ind} position={i} />;
+      })}
+      <Polyline positions={steps} />
     </MapContainer>
   );
 };
