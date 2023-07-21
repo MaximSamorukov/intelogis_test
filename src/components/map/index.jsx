@@ -5,6 +5,12 @@ import { Marker } from "react-leaflet/Marker";
 import { Polyline } from "react-leaflet/Polyline";
 import { getSteps, getWaypoints } from "../../helpers";
 
+function Control({ firstCoord, waypoints }) {
+  const map = useMap();
+  console.log(waypoints);
+  map.setView(firstCoord);
+  return null;
+}
 export const Map = () => {
   const currentRoute = useSelector((state) => state.route);
   const waypoints = getWaypoints(
@@ -12,13 +18,11 @@ export const Map = () => {
   );
   const steps = getSteps(currentRoute?.selectedPolyline?.routes || []);
 
-  const firstCoords = currentRoute.selectedCoords?.length
-    ? currentRoute.selectedCoords[0]
-    : { lat: 50, lng: 50 };
+  const firstCoord = waypoints[0] || { lat: 50, lng: 50 };
   return (
     <MapContainer
       className="main"
-      center={firstCoords}
+      center={firstCoord}
       zoom={13}
       zoomControl={true}
     >
@@ -30,6 +34,7 @@ export const Map = () => {
         return <Marker key={ind} position={i} />;
       })}
       <Polyline positions={steps} />
+      <Control firstCoord={firstCoord} waypoints={waypoints} />
     </MapContainer>
   );
 };
