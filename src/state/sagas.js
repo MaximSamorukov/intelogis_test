@@ -1,10 +1,9 @@
 import { all, takeEvery, put } from "redux-saga/effects";
 import { getRoute } from "../http-services";
-import { routes } from "../constants";
 import { setPolyline } from "./route";
 
 export function* getPolyline(info) {
-  const { data } = yield getRoute(routes[0]);
+  const { data } = yield getRoute({ points: info.currentRoute.selectedCoords });
   yield put(setPolyline(data));
 }
 
