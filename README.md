@@ -4,7 +4,7 @@
 
 Соискатель: Саморуков Максим Львович;\
 e-mail: maxim.samorukov@gmail.com;\
-telegram: https://t.me/Maksim_Samorukov\
+telegram: https://t.me/Maksim_Samorukov
 
 ## Локальная работа с проектом
 
