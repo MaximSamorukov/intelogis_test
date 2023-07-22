@@ -1,14 +1,17 @@
-import React, { useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import { Marker } from "react-leaflet/Marker";
-import { Polyline } from "react-leaflet/Polyline";
+import { Polyline as PolylineComponent } from "react-leaflet/Polyline";
 import { getSteps, getWaypoints } from "../../helpers";
+import { Polyline } from "leaflet";
+import { isEmpty } from "lodash";
 
-function Control({ firstCoord, waypoints }) {
+function Control({ waypoints }) {
   const map = useMap();
-  console.log(waypoints);
-  map.setView(firstCoord);
+  const bounds = new Polyline(waypoints).getBounds();
+  !isEmpty(bounds) &&
+    map.fitBounds(bounds, { padding: [200, 200], animate: true });
   return null;
 }
 export const Map = () => {
@@ -17,7 +20,6 @@ export const Map = () => {
     currentRoute?.selectedPolyline?.waypoints || []
   );
   const steps = getSteps(currentRoute?.selectedPolyline?.routes || []);
-
   const firstCoord = waypoints[0] || { lat: 50, lng: 50 };
   return (
     <MapContainer
@@ -33,8 +35,17 @@ export const Map = () => {
       {waypoints.map((i, ind) => {
         return <Marker key={ind} position={i} />;
       })}
-      <Polyline positions={steps} />
-      <Control firstCoord={firstCoord} waypoints={waypoints} />
+      {steps.map((step) => (
+        <PolylineComponent
+          positions={step}
+          pathOptions={{ color: "blue", weight: 3 }}
+          eventHandlers={{
+            mouseover: (e) => e.target.setStyle({ color: "red", weight: 7 }),
+            mouseout: (e) => e.target.setStyle({ color: "blue", weight: 3 }),
+          }}
+        />
+      ))}
+      <Control waypoints={waypoints} />
     </MapContainer>
   );
 };

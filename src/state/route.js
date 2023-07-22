@@ -11,7 +11,6 @@ export const routeSlice = createSlice({
     selectRoute: (state, action) => {
       state.selectedRoute = action.payload?.key;
       state.selectedCoords = action.payload?.points;
-      state.selectedPolyline = null;
     },
     deSelectRoute: (state) => {
       state.selectedRoute = null;

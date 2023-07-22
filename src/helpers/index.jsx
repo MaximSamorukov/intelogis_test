@@ -58,19 +58,18 @@ export const getStringWithCoords = ({ points }) => {
 
 export const getSteps = (data = []) =>
   data
-    .map((i) => (i.legs || []).map((leg) => leg.steps))
-    .flat()
-    .reduce((acc, array) => {
-      const concatedArray = acc.concat(array);
-      return concatedArray;
-    }, [])
-    .map(
-      ({
-        maneuver: {
-          location: [lng, lat],
-        },
-      }) => [lat, lng]
-    );
+    .map((i) =>
+      (i.legs || []).map((leg) =>
+        leg.steps.map(
+          ({
+            maneuver: {
+              location: [lng, lat],
+            },
+          }) => [lat, lng]
+        )
+      )
+    )
+    .flat();
 
 export const getWaypoints = (data = []) =>
   data.map(({ location: [lng, lat] }) => [lat, lng]);
